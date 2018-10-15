@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
     template: `
         <div class="footer">
             <div class="card clearfix">
-                <span class="footer-text-left">PrimeNG POSEIDON for Angular</span>
+                <span class="footer-text-left">SEP Events, KTH 2018 </span>
                 <span class="footer-text-right"><span class="ui-icon ui-icon-copyright"></span>  <span>All Rights Reserved</span></span>
             </div>
         </div>

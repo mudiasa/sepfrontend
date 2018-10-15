@@ -1,0 +1,69 @@
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+        <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    </div>
+    <!-- Left side: variant form -->
+    <div class="ui-g-4 center">
+        <!-- <br>{{ addAssignmentForm.value | json }} -->
+        <p-panel class="" header="Login">
+
+            <form class="card card-w-title" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                <fieldset>
+                    <!-- <legend>Login</legend> -->
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="">
+                      
+                        <label for="">Username</label>
+                        <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
+                            <input type="text" pInputText placeholder="" formControlName="username">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="">
+                       
+                        <label for="">Password</label>
+                        <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
+                            <input type="text" pInputText placeholder="" formControlName="password">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+
+
+
+                    <div class="ui-g-6">
+                        <button pButton type="submit" label="Login" icon="fa fa-floppy-o" style="margin-bottom:0px; margin-right:10px"
+                            class="green-btn raised-btn" [disabled]="hasFormsErrors()"></button>
+                    </div>
+                    <div class="ui-g-6">
+                        <button pButton (click)="cancelLogIn()" type="button" label="Cancel" icon="fa fa-times"
+                            style="margin-bottom:0px" class="raised-btn"></button>
+                    </div>
+                </fieldset>
+            </form>
+        </p-panel>
+    </div>
+
+
+
+    <!-- Dialogs and Growls -->
+    <!-- <p-dialog header="Confirm Edit" [modal]="true" [(visible)]="displayCancelDialog">
+        Are you sure? All changes will be lost!
+        <p-footer>
+            <button pButton label="Cancel" icon="fa fa-times" (click)="cancelDialog()" class="ui-button-secondary"></button>
+            <button pButton label="Lose Changes" icon="fa fa-check" (click)="cancelDialogAndLooseChanges()"></button>
+        </p-footer>
+    </p-dialog> -->
+
+    <p-growl [value]="messages" [immutable]="false" life="2000"></p-growl>

@@ -1,5 +1,13 @@
+import { SubteamMemberComponent } from './components/subteam-member/subteam-member.component';
+import { ServiceManagerComponent } from './components/service-manager/service-manager.component';
+import { ProdmanagerComponent } from './components/prodmanager/prodmanager.component';
+import { AdminmanagerComponent } from './components/adminmanager/adminmanager.component';
+import { FinanceManagerComponent } from './components/finance-manager/finance-manager.component';
+import { CsmanagerComponent } from './components/csmanager/csmanager.component';
+import { CsemployeeComponent } from './components/csemployee/csemployee.component';
+import { RegisterComponent } from './components/register/register.component';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
@@ -95,6 +103,8 @@ import {CarService} from './demo/service/carservice';
 import {CountryService} from './demo/service/countryservice';
 import {EventService} from './demo/service/eventservice';
 import {NodeService} from './demo/service/nodeservice';
+import { LoginComponent } from './components/login/login.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
     imports: [
@@ -167,7 +177,10 @@ import {NodeService} from './demo/service/nodeservice';
         TooltipModule,
         TreeModule,
         TreeTableModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpModule,
+        ReactiveFormsModule,
+        
     ],
     declarations: [
         AppComponent,
@@ -189,7 +202,17 @@ import {NodeService} from './demo/service/nodeservice';
         EmptyDemoComponent,
         FileDemoComponent,
         UtilsDemoComponent,
-        DocumentationComponent
+        DocumentationComponent,
+        LoginComponent,
+        RegisterComponent,
+        CsemployeeComponent,
+        CsmanagerComponent,
+        FinanceManagerComponent,
+        AdminmanagerComponent,
+        ProdmanagerComponent,
+        ServiceManagerComponent,
+        SubteamMemberComponent,
+        
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

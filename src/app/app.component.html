@@ -8,20 +8,20 @@
     <app-topbar></app-topbar>
     <div class="layout-menu-container" (click)="onMenuClick($event)">
         <p-scrollPanel #layoutMenuScroller [style]="{height:'100%'}">
-            <div class=" menu-scroll-content">
-                <div class="search-input">
+            <div class=" menu-scroll-content" style="margin-top:60px">
+                <!-- <div class="search-input">
                     <input type="text" placeholder="Search"/>
                     <i class="fa fa-search"></i>
-                </div>
+                </div> -->
                 <app-menu [reset]="resetMenu"></app-menu>
                 <div class="layout-menu-footer">
-                    <span class="layout-menu-footer-title">Tasks Overview</span>
+                    <!-- <span class="layout-menu-footer-title">Tasks Overview</span>
 
                     <p-progressBar [value]="50" [showValue]="false"></p-progressBar>
                     Today
 
                     <p-progressBar [value]="80" [showValue]="false"></p-progressBar>
-                    Overall
+                    Overall -->
                 </div>
             </div>
         </p-scrollPanel>

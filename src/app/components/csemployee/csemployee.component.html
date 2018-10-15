@@ -1,0 +1,207 @@
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+        <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    </div>
+    <!-- Left side: variant form -->
+    <div class="ui-g-4 center">
+        <!-- <br>{{ requestForm.value | json }} -->
+        <p-panel class="" header="Create Request">
+
+            <form class="card card-w-title" [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+
+                <fieldset>
+                    <legend> (<i class="fa fa-asterisk" aria-hidden="true"></i> = Mandatory Fields)</legend>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <label for="">Record Number</label>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText placeholder="" formControlName="recordNumber">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <label for="">Client Name</label>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText placeholder="" formControlName="clientName">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <label for="">Event Type</label>
+                        <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
+                            <input type="text" pInputText placeholder="" formControlName="eventType">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <label for="">Start Date</label>
+                        <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
+                            <input type="text" pInputText placeholder="" formControlName="startDate">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <label for="">Finish Date</label>
+                        <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
+                            <input type="text" pInputText placeholder="" formControlName="finishDate">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <label for="">No Of Attendees</label>
+                        <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
+                            <input type="text" pInputText placeholder="" formControlName="numberOfAttendees">
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                        <label for="">Expected Budget</label>
+                        <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
+                            <input type="text" pInputText placeholder="" formControlName="expectedBudget">
+                        </div>
+                    </div>
+
+
+
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+
+                    <div class="">
+                        <i class="fa fa-asterisk" aria-hidden="true"></i><i class="fa fa-search"></i>&nbsp;
+                        <label for="searchProject">Signed By </label>
+                        <div class="">
+                    <p-autoComplete id="" formControlName="signedBy" [suggestions]="filteredUsers"
+                                (completeMethod)="getFilteredUsers($event)" [size]="30" (onSelect)="getUserId()" [minLength]="1"
+                                placeholder="Search... username/dept." [dropdown]="false" field="username">
+                                <ng-template let-user pTemplate="item">
+                                    <div class="ui-helper-clearfix">
+                                        <div style="font-size:12px;float:right;margin:10px 10px 0 0">
+                                            {{user.username}} | {{user.type}} | {{user.department}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                        </div>
+                    </div>
+
+
+
+                    <div class="ui-g-12">
+                        <button pButton type="submit" label="Save & Sent to CSM" icon="fa fa-floppy-o" style="margin-bottom:0px; margin-right:10px"
+                            class="green-btn raised-btn" [disabled]="hasFormsErrors()"></button>
+                    </div>
+                    <div class="ui-g-6">
+                        <button pButton (click)="cancelRequest()" type="button" label="Cancel" icon="fa fa-times" style="margin-bottom:0px"
+                            class="raised-btn"></button>
+                    </div>
+                </fieldset>
+            </form>
+        </p-panel>
+    </div>
+
+    <!-- Right side: variant tabell -->
+    <div class="ui-g-12 ui-lg-8">
+        <ng-container *ngIf="!rerender">
+            <p-panel class="" header="Registered Requests">
+                <div class="card card-w-title">
+                    <p-table #ttAddAssignment [columns]="cols" [value]="requests" selectionMode="single" [(selection)]="selectedAssignment"
+                        sortField="department" sortOrder="1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
+                        [responsive]="true">
+
+                        <ng-template pTemplate="colgroup" let-columns>
+                            <colgroup>
+                                <col *ngFor="let col of columns">
+                            </colgroup>
+                        </ng-template>
+
+                        <ng-template pTemplate="caption">
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="40" placeholder="Global Filter" (input)="ttAddAssignment.filterGlobal($event.target.value, 'contains')"
+                                style="width:50%">
+                        </ng-template>
+
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn>
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                                </th>
+                                <!-- <tr>
+                            <th *ngFor="let col of cols" pResizableColumn>
+                                <input pInputText type="text" placeholder="Filter" (input)="ttAddAssignment.filter($event.target.value, col.field, 'contains')">
+                            </th>
+                        </tr> -->
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr [pSelectableRow]="rowData">
+                                <td *ngFor="let col of columns" class="ui-resizable-column">
+                                    {{rowData[col.field]}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer" let-columns>
+                            <tr>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            There are {{requests?.length}} registered Users in SEP Events&#8482;
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td [attr.colspan]="columns.length">
+                                    No records found
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </p-panel>
+
+        </ng-container>
+    </div>
+
+
+
+    <!-- Dialogs and Growls -->
+    <!-- <p-dialog header="Confirm Edit" [modal]="true" [(visible)]="displayCancelDialog">
+        Are you sure? All changes will be lost!
+        <p-footer>
+            <button pButton label="Cancel" icon="fa fa-times" (click)="cancelDialog()" class="ui-button-secondary"></button>
+            <button pButton label="Lose Changes" icon="fa fa-check" (click)="cancelDialogAndLooseChanges()"></button>
+        </p-footer>
+    </p-dialog> -->
+
+    <p-growl [value]="messages" [immutable]="false" life="2000"></p-growl>
