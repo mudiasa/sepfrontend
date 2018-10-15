@@ -1,3 +1,4 @@
+import { FinanceManagerComponent } from './components/finance-manager/finance-manager.component';
 import { SubteamMemberComponent } from './components/subteam-member/subteam-member.component';
 import { ServiceManagerComponent } from './components/service-manager/service-manager.component';
 import { ProdmanagerComponent } from './components/prodmanager/prodmanager.component';
@@ -42,7 +43,7 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent},
     { path: 'csemployee', component: CsemployeeComponent},
     { path: 'csmanager', component: CsmanagerComponent},
-    { path: 'fmanager', component: CsmanagerComponent},
+    { path: 'fmanager', component: FinanceManagerComponent},
     { path: 'adminmanager', component: AdminmanagerComponent},
     { path: 'prodmanager', component: ProdmanagerComponent},
     { path: 'servicemanager', component: ServiceManagerComponent},

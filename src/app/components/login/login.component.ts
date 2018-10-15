@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/stmember']);        
             }
         } else {
-            this.router.navigate(['/register']);
+            this.messages.push({ severity: 'error', summary: 'Error', detail: 'Invalid Credentials' });
         }
 
         

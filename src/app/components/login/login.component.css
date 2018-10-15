@@ -5,3 +5,13 @@
     margin-top: 8%;
     margin-bottom: 8%;
 }
+
+.btn-size-long {
+    width: 15em;
+    margin-top: 2em;
+}
+
+.btn-size-short {
+    width: 9em;
+    margin-top: 2em;
+}

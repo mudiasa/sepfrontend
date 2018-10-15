@@ -87,7 +87,7 @@
 
                     <div class="">
                         <i class="fa fa-asterisk" aria-hidden="true"></i>
-                        <label for="">Expected Budget</label>
+                        <label for="">Expected Budget (Kr)</label>
                         <div class="ui-inputgroup" [pTooltip]="'Ex.Field Test Vaiants Evaluation'">
                             <input type="text" pInputText placeholder="" formControlName="expectedBudget">
                         </div>
@@ -119,13 +119,12 @@
 
 
 
-                    <div class="ui-g-12">
+                    <div class="">
                         <button pButton type="submit" label="Save & Sent to CSM" icon="fa fa-floppy-o" style="margin-bottom:0px; margin-right:10px"
-                            class="green-btn raised-btn" [disabled]="hasFormsErrors()"></button>
-                    </div>
-                    <div class="ui-g-6">
+                            class="btn-size-long ui-button-success" [disabled]="hasFormsErrors()"></button>
+           
                         <button pButton (click)="cancelRequest()" type="button" label="Cancel" icon="fa fa-times" style="margin-bottom:0px"
-                            class="raised-btn"></button>
+                            class="btn-size-short "></button>
                     </div>
                 </fieldset>
             </form>
@@ -138,7 +137,7 @@
             <p-panel class="" header="Registered Requests">
                 <div class="card card-w-title">
                     <p-table #ttAddAssignment [columns]="cols" [value]="requests" selectionMode="single" [(selection)]="selectedAssignment"
-                        sortField="department" sortOrder="1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
+                        sortField="recordNumber" sortOrder="1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
                         [responsive]="true">
 
                         <ng-template pTemplate="colgroup" let-columns>
@@ -159,11 +158,6 @@
                                     {{col.header}}
                                     <p-sortIcon [field]="col.field"></p-sortIcon>
                                 </th>
-                                <!-- <tr>
-                            <th *ngFor="let col of cols" pResizableColumn>
-                                <input pInputText type="text" placeholder="Filter" (input)="ttAddAssignment.filter($event.target.value, col.field, 'contains')">
-                            </th>
-                        </tr> -->
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr [pSelectableRow]="rowData">

@@ -1,8 +1,8 @@
+import { ClientRequest } from './../../models/client-request';
 import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
 import { RequestService } from './../../services/request.service';
 import { MenuItem, Message } from 'primeng/primeng';
-import { Request } from './../../models/Request';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -15,8 +15,8 @@ export class CsemployeeComponent implements OnInit {
 
     requestForm: FormGroup;
 
-    requests: Request [];
-    request: Request;
+    requests: ClientRequest [];
+    request: ClientRequest;
 
     users: User[];
     user: User;
@@ -67,7 +67,7 @@ export class CsemployeeComponent implements OnInit {
             { field: 'startDate', header: 'Start' },
             { field: 'finishDate', header: 'Finish' },
             { field: 'numberOfAttendees', header: 'No Attendees' },
-            { field: 'expectedBudget', header: 'Expected Budget' },
+            { field: 'expectedBudget', header: 'Expected Budget(Kr)' },
 
         ];
     }
@@ -94,11 +94,10 @@ export class CsemployeeComponent implements OnInit {
         let r = Object.assign({}, this.request, this.requestForm.value);
 
         this.setAdditionalProperties(r);
-
         console.log("u", r);
 
         this.requestService.create(r)
-            .subscribe(x => {
+            .subscribe(r => {
                 this.renderTable();
                 this.messages.push({ severity: 'success', summary: 'Request Created & Sent to CS manager', detail: 'User created' });
             },
@@ -112,6 +111,10 @@ export class CsemployeeComponent implements OnInit {
 
     setAdditionalProperties(r) {
         r.userId = this.userId;
+        r.isSentToCSManager = true;
+        r.isSentToFinanceManager = false;
+        r.isSentToAdminManager = false;
+        r.isSentBackToCSManager = false;
     }
 
     renderTable() {

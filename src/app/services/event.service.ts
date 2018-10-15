@@ -6,13 +6,14 @@ import { throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RequestService {
-    private readonly requestsEndPoint = 'http://localhost:5000/api/requests/';
+
+export class EventService {
+    private readonly eventEndPoint = 'http://localhost:5000/api/events';
 
     constructor(private http: Http) { }
 
     getRequests() {
-        return this.http.get(this.requestsEndPoint)
+        return this.http.get(this.eventEndPoint)
             .pipe(map(res => res.json()),
                 catchError(error => {
                     return throwError("Something went wrong");
@@ -22,7 +23,7 @@ export class RequestService {
     create(obj) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.requestsEndPoint, obj, options)
+        return this.http.post(this.eventEndPoint, obj, options)
             .pipe(map(res => res.json()),
                 catchError(error => {
                     return throwError("Something went wrong");
@@ -32,23 +33,10 @@ export class RequestService {
     update(obj, id) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.requestsEndPoint + id, obj, options)
+        return this.http.put(this.eventEndPoint + id, obj, options)
             .pipe(map(res => res.json()),
                 catchError(error => {
                     return throwError("Something went wrong");
                 }));
     }
-
-    delete(id) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.delete(this.requestsEndPoint + id, options)
-            .pipe(map(res => res.json()),
-                catchError(error => {
-                    return throwError("Something went wrong");
-                }));
-    }
-
-
-
 }
