@@ -8,7 +8,7 @@ import { throwError } from 'rxjs';
 })
 export class UserService {
 
-    private readonly usersEndPoint = 'http://localhost:5000/api/users';
+    private readonly usersEndPoint = 'http://localhost:5000/api/users/';
 
     constructor(private http: Http) { }
 

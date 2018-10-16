@@ -1,3 +1,5 @@
+import { EventService } from './../../services/event.service';
+import { ClientEvent } from './../../models/client-event';
 import { ClientRequest } from './../../models/client-request';
 
 import { RequestService } from './../../services/request.service';
@@ -12,20 +14,26 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 export class CsmanagerComponent implements OnInit {
 
     requests: ClientRequest[];
-    filteredRequests: ClientRequest[];
     request: ClientRequest;
 
     selectedRequest: ClientRequest; 
 
+    myEvents: ClientEvent[];
+    myEvent: ClientEvent;
+    selectedEvent: ClientEvent
+
     rerender: boolean;
     displayDeleteDialog: boolean;
+    displayEventDialog: boolean;
     cols: any[];
+    colsEvent: any[];
 
     messages: Message[] = [];
     breadcrumbItems: MenuItem[];
 
     constructor(
         private requestService: RequestService,
+        private eventService: EventService,
         private cdRef: ChangeDetectorRef,
     ) { }
 
@@ -33,12 +41,14 @@ export class CsmanagerComponent implements OnInit {
 
         this.breadcrumbItems = [];
 
-        this.filteredRequests = [];
-
         this.breadcrumbItems.push({ label: 'Customer Service Manager' });
 
         this.requestService.getRequests().subscribe(r => {
             this.requests = r.filter(r => r.isSentToCSManager === true);
+        });
+
+        this.eventService.getEvents().subscribe(e => {
+            this.myEvents = e.filter(e => e.isSentToCSManager === true);
         });
 
 
@@ -52,7 +62,20 @@ export class CsmanagerComponent implements OnInit {
             { field: 'expectedBudget', header: 'Expected Budget(Kr)' },
 
         ];
+
+        this.colsEvent = [
+
+            { field: 'type', header: 'Type' },
+            { field: 'startDate', header: 'Start' },
+            { field: 'finishDate', header: 'Finish' },
+            { field: 'budget', header: 'Buget' },
+            { field: 'numberOfAttendees', header: 'No Attendees' },
+            { field: 'ClientName', header: 'Client' },
+            { field: 'ClientPhone', header: 'Phone' },
+
+        ];
     }
+
 
     sendToFinancialManager() {
         this.setAdditionalProperties(this.selectedRequest);
@@ -70,13 +93,35 @@ export class CsmanagerComponent implements OnInit {
 
     }
 
+    sendEventToProd() {
+        this.setAdditionalEventProperties(this.selectedEvent);
+
+        console.log("this.selectedEvent", this.selectedEvent)
+
+        this.eventService.update(this.selectedEvent, this.selectedEvent.id)
+            .subscribe(e => {
+                this.renderTable();
+                console.log("ee", e);
+                this.messages.push({ severity: 'success', summary: 'Success', detail: 'Event Sent to Prod Managers' });
+            },
+                err => {
+                    this.messages.push({ severity: 'error', summary: 'Error', detail: 'An unexpected error happened' });
+                });
+
+    }
+
     setAdditionalProperties(r) {
         r.isSentToCSManager = false ;
         r.isSentToFinanceManager = true;
         r.isSentToAdminManager = false;
-        r.isSentBackToCSManager = false;
+        r.isSentBackToCSManager = false; 
+    }
 
-        
+    setAdditionalEventProperties(e) {
+        e.isCreated = true;
+        e.isSentToCSManager = false;
+        e.isSentToProdManagers = true;
+        e.isSentToSubTeams = false;
     }
 
     deleteRequest() {
@@ -94,19 +139,36 @@ export class CsmanagerComponent implements OnInit {
 
         this.requestService.getRequests().subscribe(r => {
             this.requests = r.filter(r => r.isSentToCSManager === true);
+
+            this.eventService.getEvents().subscribe(e => {
+                this.myEvents = e.filter(r => r.isSentToCSManager === true);
+            });
+                
             this.rerender = true;
             this.cdRef.detectChanges();
             this.rerender = false;
+        
         });
     }
 
     initBooleans() {
         this.displayDeleteDialog = false;
+        this.displayEventDialog = false;
     }
 
     showDeleteDialog() {
         this.displayDeleteDialog = true;
     }
+
+    showEventDialog() {
+        this.displayEventDialog = true;
+    }
+
+    planWithClient() {
+        this.messages.push({ severity: '', summary: '', detail: 'Feature Not Implemented :)' });
+    }
+
+  
 
 
 

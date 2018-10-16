@@ -1,3 +1,4 @@
+import { RequestService } from 'src/app/services/request.service';
 import { SubteamMemberComponent } from './components/subteam-member/subteam-member.component';
 import { ServiceManagerComponent } from './components/service-manager/service-manager.component';
 import { ProdmanagerComponent } from './components/prodmanager/prodmanager.component';
@@ -216,7 +217,8 @@ import { HttpModule } from '@angular/http';
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        CarService, CountryService, EventService, NodeService
+        CarService, CountryService, EventService, NodeService,
+
     ],
     bootstrap: [AppComponent]
 })

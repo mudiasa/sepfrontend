@@ -8,11 +8,11 @@ import { throwError } from 'rxjs';
 })
 
 export class EventService {
-    private readonly eventEndPoint = 'http://localhost:5000/api/events';
+    private readonly eventEndPoint = 'http://localhost:5000/api/events/';
 
     constructor(private http: Http) { }
 
-    getRequests() {
+    getEvents() {
         return this.http.get(this.eventEndPoint)
             .pipe(map(res => res.json()),
                 catchError(error => {

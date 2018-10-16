@@ -77,7 +77,7 @@ export class FinanceManagerComponent implements OnInit {
             .subscribe(r => {
                 this.renderTable();
                 console.log("req", r);
-                this.messages.push({ severity: 'success', summary: 'Success', detail: 'Request Sent to Finance Manager' });
+                this.messages.push({ severity: 'success', summary: 'Success', detail: 'Request Sent to Administration Manager' });
             },
                 err => {
                     this.messages.push({ severity: 'error', summary: 'Error', detail: 'An unexpected error happened' });
