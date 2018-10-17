@@ -7,7 +7,7 @@
         <p-panel class="" header="Select an Event to process">
             <div class="card card-w-title">
                 <p-table #ttEvent [columns]="colsEvent" [value]="myEvents" selectionMode="single" [(selection)]="selectedEvent"
-                    sortField="recordNumber" sortOrder="1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
+                    sortField="id" sortOrder="-1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
                     [responsive]="true">
 
                     <ng-template pTemplate="colgroup" let-columns>

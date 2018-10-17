@@ -137,7 +137,7 @@
             <p-panel class="" header="Registered Requests">
                 <div class="card card-w-title">
                     <p-table #ttAddAssignment [columns]="cols" [value]="requests" selectionMode="single" [(selection)]="selectedAssignment"
-                        sortField="recordNumber" sortOrder="1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
+                        sortField="id" sortOrder="-1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
                         [responsive]="true">
 
                         <ng-template pTemplate="colgroup" let-columns>

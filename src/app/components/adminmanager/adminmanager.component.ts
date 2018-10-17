@@ -125,6 +125,15 @@ export class AdminmanagerComponent implements OnInit {
 
     }
 
+    // getClientPhoneNumber(clientId) {
+    //     this.clientService.getclients().subscribe(c => {
+    //             console.log("c",c );
+    //         this.client = c.find(x => x.id === clientId);  
+    //         console.log("this.client", this.client);   
+    //     });
+    //     return this.client;
+    // }
+
     createEventFromRequest() {
 
         let e: ClientEvent ;
@@ -135,6 +144,8 @@ export class AdminmanagerComponent implements OnInit {
         e.finishDate = this.selectedRequest.finishDate,
         e.numberOfAttendees = this.selectedRequest.numberOfAttendees,
         e.budget = this.selectedRequest.expectedBudget,
+        e.clientName = this.selectedRequest.clientName,
+        //e.clientPhone = this.getClientPhoneNumber(this.clientId).phone,
         e.clientId = this.clientId,
         e.userId = this.userId,
 
@@ -145,6 +156,18 @@ export class AdminmanagerComponent implements OnInit {
 
         this.eventService.create(e)
             .subscribe(x => {
+                //update phone
+                this.clientService.getclients().subscribe(c => {
+                    let client = c.find(x => x.id === e.clientId);
+                    console.log("client", client);
+
+                    x.clientPhone = client.phone;
+
+                });
+
+                
+
+
                 this.setRequestReadyToArchive();               
                 this.renderTable();
                 this.messages.push({ severity: 'success', summary: 'Success', detail: 'Event created' });

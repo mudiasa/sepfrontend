@@ -119,7 +119,7 @@
         <p-panel class="" header="Registered Users">
             <div class="card card-w-title">
                 <p-table #ttAddAssignment [columns]="cols" [value]="users" selectionMode="single" [(selection)]="selectedAssignment"
-                    sortField="department" sortOrder="1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
+                    sortField="id" sortOrder="-1" [resizableColumns]="true" [scrollable]="true" scrollHeight="650px"
                     [responsive]="true">
 
                     <ng-template pTemplate="colgroup" let-columns>

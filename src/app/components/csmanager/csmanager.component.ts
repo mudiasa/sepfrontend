@@ -1,3 +1,5 @@
+import { Client } from 'src/app/models/client';
+import { ClientService } from './../../services/client.service';
 import { EventService } from './../../services/event.service';
 import { ClientEvent } from './../../models/client-event';
 import { ClientRequest } from './../../models/client-request';
@@ -15,6 +17,8 @@ export class CsmanagerComponent implements OnInit {
 
     requests: ClientRequest[];
     request: ClientRequest;
+
+    client: Client;
 
     selectedRequest: ClientRequest; 
 
@@ -34,6 +38,7 @@ export class CsmanagerComponent implements OnInit {
     constructor(
         private requestService: RequestService,
         private eventService: EventService,
+        private clientService: ClientService,
         private cdRef: ChangeDetectorRef,
     ) { }
 
@@ -49,9 +54,34 @@ export class CsmanagerComponent implements OnInit {
 
         this.eventService.getEvents().subscribe(e => {
             this.myEvents = e.filter(e => e.isSentToCSManager === true);
+            
+            // console.log("this.myEvents", this.myEvents);
+
+            // for (var i = 0; i < this.myEvents.length; i++) {
+            //     var cId = this.myEvents[i].clientId;
+            //     console.log("cId", cId );
+
+            //     this.clientService.getclients().subscribe(c => {
+            //         console.log("c",c );
+            //         this.client = c.find(x => x.id === cId);
+
+            //         console.log("this.client ", this.client );
+
+            //         e[i].clientName = this.client.name;
+            //         e[i].clientPhone = this.client.phone;
+
+            //         console.log("e",e);
+
+            //         this.eventService.update(e[i], e[i].id).subscribe(c=>{
+            //             console.log("c",c);
+            //         });
+            //     });
+                
+            // }
+                
         });
 
-
+        
         this.cols = [
 
             { field: 'recordNumber', header: 'Rec No' },
@@ -70,11 +100,13 @@ export class CsmanagerComponent implements OnInit {
             { field: 'finishDate', header: 'Finish' },
             { field: 'budget', header: 'Buget' },
             { field: 'numberOfAttendees', header: 'No Attendees' },
-            { field: 'ClientName', header: 'Client' },
-            { field: 'ClientPhone', header: 'Phone' },
+            { field: 'clientName', header: 'Client' },
+            { field: 'clientPhone', header: 'Phone' },
 
         ];
     }
+
+   
 
 
     sendToFinancialManager() {

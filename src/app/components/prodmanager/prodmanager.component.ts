@@ -46,9 +46,9 @@ export class ProdmanagerComponent implements OnInit {
             { field: 'finishDate', header: 'Finish' },
             { field: 'budget', header: 'Buget' },
             { field: 'numberOfAttendees', header: 'No Attendees' },
-            { field: 'ClientName', header: 'Client' },
-            { field: 'ClientPhone', header: 'Phone' },
-            { field: 'description', header: 'Comments' },
+            { field: 'clientName', header: 'Client' },
+            { field: 'clientPhone', header: 'Phone' },
+            { field: 'description', header: 'SubTeam Comments' },
 
         ];
     }

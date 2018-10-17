@@ -62,7 +62,6 @@ export class RegisterComponent implements OnInit {
         this.userTypes.push({ label: 'Finance Manager', value: 'Finance Manager' });
         this.userTypes.push({ label: 'Administration Manager', value: 'Administration Manager' });
         this.userTypes.push({ label: 'Production Manager', value: 'Production Manager' });
-        this.userTypes.push({ label: 'Service Manager', value: 'Service Manager' });
         this.userTypes.push({ label: 'Subteam Member', value: 'Subteam Member' });
             
         this.departments = [];

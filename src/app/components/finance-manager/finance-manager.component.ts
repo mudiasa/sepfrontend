@@ -54,6 +54,7 @@ export class FinanceManagerComponent implements OnInit {
             { field: 'finishDate', header: 'Finish' },
             { field: 'numberOfAttendees', header: 'No Attendees' },
             { field: 'expectedBudget', header: 'Expected Budget(Kr)' },
+            { field: 'description', header: 'Feedback' },
 
         ];
     }
